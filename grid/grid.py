@@ -8,107 +8,74 @@ class Grid:
         row_list = list(row)
         self.grid.append(row_list)
 
+    def check_for_green_neighbours(self, curr_x, curr_y, x=0, y=0):
+        try:
+            if self.grid[curr_x + x][curr_y + y] == '1':
+                return 1
+        except IndexError:
+            return 0
+
     def check_for_green_neighbours_corner_cells(self, curr_x, curr_y):
         # check on (0, 0), (0, y - 1), (x -1 , 0), (x - 1, y - 1)
         # needs testing
         green_number = 0
         if curr_x == 0 and curr_y == 0:
-            if self.grid[curr_x][curr_y + 1] == '1':
-                green_number += 1
-            if self.grid[curr_x + 1][curr_y] == '1':
-                green_number += 1
-            if self.grid[curr_x + 1][curr_y + 1] == '1':
-                green_number += 1
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, y=1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=1, y=1)
         elif curr_x == 0 and curr_y == self.y - 1:
-            if self.grid[curr_x][curr_y - 1] == '1':
-                green_number += 1
-            if self.grid[curr_x + 1][curr_y] == '1':
-                green_number += 1
-            if self.grid[curr_x + 1][curr_y - 1] == '1':
-                green_number += 1
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, y=-1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=1, y=-1)
         elif curr_x == self.x - 1 and curr_y == 0:
-            if self.grid[curr_x][curr_y + 1] == '1':
-                green_number += 1
-            if self.grid[curr_x - 1][curr_y] == '1':
-                green_number += 1
-            if self.grid[curr_x - 1][curr_y + 1] == '1':
-                green_number += 1
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, y=1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=-1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=-1, y=1)
         else:
-            if self.grid[curr_x][curr_y - 1] == '1':
-                green_number += 1
-            if self.grid[curr_x - 1][curr_y] == '1':
-                green_number += 1
-            if self.grid[curr_x - 1][curr_y - 1] == '1':
-                green_number += 1
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, y=-1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=-1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=-1, y=-1)
         return green_number
 
     def check_for_green_neighbours_bound_line_cells(self, curr_x, curr_y):
         # check on (0, y), (x, 0), (x - 1, y), (x, y - 1)
         green_number = 0
         if curr_x == 0:
-            if self.grid[curr_x][curr_y + 1] == '1':
-                green_number += 1
-            if self.grid[curr_x][curr_y - 1] == '1':
-                green_number += 1
-            if self.grid[curr_x + 1][curr_y - 1] == '1':
-                green_number += 1
-            if self.grid[curr_x + 1][curr_y] == '1':
-                green_number += 1
-            if self.grid[curr_x + 1][curr_y + 1] == '1':
-                green_number += 1
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, y=1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, y=-1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=1, y=-1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=1, y=1)
         elif curr_x == self.x - 1:
-            if self.grid[curr_x][curr_y + 1] == '1':
-                green_number += 1
-            if self.grid[curr_x][curr_y - 1] == '1':
-                green_number += 1
-            if self.grid[curr_x - 1][curr_y - 1] == '1':
-                green_number += 1
-            if self.grid[curr_x - 1][curr_y] == '1':
-                green_number += 1
-            if self.grid[curr_x - 1][curr_y + 1] == '1':
-                green_number += 1
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, y=1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, y=-1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=-1, y=1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=-1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=-1, y=1)
         elif curr_y == 0:
-            if self.grid[curr_x][curr_y + 1] == '1':
-                green_number += 1
-            if self.grid[curr_x - 1][curr_y] == '1':
-                green_number += 1
-            if self.grid[curr_x - 1][curr_y + 1] == '1':
-                green_number += 1
-            if self.grid[curr_x + 1][curr_y] == '1':
-                green_number += 1
-            if self.grid[curr_x + 1][curr_y + 1] == '1':
-                green_number += 1
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, y=1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=-1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=-1, y=1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=1, y=1)
         else:
-            if self.grid[curr_x][curr_y - 1] == '1':
-                green_number += 1
-            if self.grid[curr_x - 1][curr_y - 1] == '1':
-                green_number += 1
-            if self.grid[curr_x - 1][curr_y] == '1':
-                green_number += 1
-            if self.grid[curr_x + 1][curr_y] == '1':
-                green_number += 1
-            if self.grid[curr_x + 1][curr_y - 1] == '1':
-                green_number += 1
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, y=-1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=-1, y=-1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=-1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=1)
+            green_number += self.check_for_green_neighbours(curr_x, curr_y, x=1, y=-1)
         return green_number
 
     def check_for_green_neighbours_inner_cells(self, curr_x, curr_y):
         green_number = 0
-        if self.grid[curr_x][curr_y - 1] == '1':
-            green_number += 1
-        if self.grid[curr_x][curr_y + 1] == '1':
-            green_number += 1
-        if self.grid[curr_x - 1][curr_y - 1] == '1':
-            green_number += 1
-        if self.grid[curr_x - 1][curr_y + 1] == '1':
-            green_number += 1
-        if self.grid[curr_x - 1][curr_y] == '1':
-            green_number += 1
-        if self.grid[curr_x + 1][curr_y - 1] == '1':
-            green_number += 1
-        if self.grid[curr_x + 1][curr_y] == '1':
-            green_number += 1
-        if self.grid[curr_x + 1][curr_y + 1] == '1':
-            green_number += 1
+        green_number += self.check_for_green_neighbours(curr_x, curr_y, y=-1)
+        green_number += self.check_for_green_neighbours(curr_x, curr_y, y=1)
+        green_number += self.check_for_green_neighbours(curr_x, curr_y, x=-1, y=-1)
+        green_number += self.check_for_green_neighbours(curr_x, curr_y, x=-1)
+        green_number += self.check_for_green_neighbours(curr_x, curr_y, x=-1, y=1)
+        green_number += self.check_for_green_neighbours(curr_x, curr_y, x=1, y=-1)
+        green_number += self.check_for_green_neighbours(curr_x, curr_y, x=1)
+        green_number += self.check_for_green_neighbours(curr_x, curr_y, x=1, y=1)
         return green_number
 
     def create_next_generation(self):

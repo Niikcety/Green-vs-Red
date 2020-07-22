@@ -20,3 +20,14 @@ def check_if_row_contains_only_valid_chars(row):
         if char != '1' and char != '0':
             return False
     return True
+
+
+def check_if_wanted_values_are_valid(wanted):
+    wanted_list = wanted.split(', ')
+    wanted_x = wanted_list[0]
+    wanted_y = wanted_list[1]
+    wanted_turns = wanted_list[2]
+    if wanted_x < 0 or wanted_y < 0 or wanted_turns < 0:
+        return False
+    else:
+        return True

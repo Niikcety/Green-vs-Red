@@ -1,4 +1,5 @@
-from utils.utils import check_if_size_is_correct, check_if_row_size_is_correct, check_if_row_contains_only_valid_chars
+from utils.utils import check_if_size_is_correct, check_if_row_size_is_correct, check_if_row_contains_only_valid_chars,
+    check_if_wanted_values_are_valid
 
 
 class BaseGrid:
@@ -23,4 +24,13 @@ class BaseGrid:
                 # should append it to the grid
                 pass
             else:
-                raise ValueError("Invalid row it should only contain '1' and '0' and must be with length {}".format(self.y))
+                raise ValueError(
+                    "Invalid row it should only contain '1' and '0' and must be with length {}".format(self.y))
+        wanted = input()
+        if check_if_wanted_values_are_valid(wanted):
+            wanted_list = wanted.split(', ')
+            self.wanted_x = wanted_list[0]
+            self.wanted_y = wanted_list[1]
+            self.turns = wanted_list[2]
+        else:
+            raise ValueError("Invalid expected input it should be like: 'x, y, turns'.")

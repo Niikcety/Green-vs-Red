@@ -1,27 +1,11 @@
-from basegrid.basegrid import BaseGrid
-from grid.grid import Grid
+from userinput.userinput import UserInput
+
+
+def main():
+    user_input = UserInput()
+    user_input.get_input()
+    user_input.get_output()
+
 
 if __name__ == '__main__':
-    bg = BaseGrid()
-    bg.get_input()
-    print(bg.grid.grid)
-    bg.grid.create_next_generation()
-    print(bg.grid.grid)
-    bg.grid.create_next_generation()
-    print(bg.grid.grid)
-    bg.grid.create_next_generation()
-    print(bg.grid.grid)
-    bg.grid.create_next_generation()
-    print(bg.grid.grid)
-    bg.grid.create_next_generation()
-    print(bg.grid.grid)
-    bg.grid.create_next_generation()
-    print(bg.grid.grid)
-    bg.grid.create_next_generation()
-    print(bg.grid.grid)
-    bg.grid.create_next_generation()
-    print(bg.grid.grid)
-    bg.grid.create_next_generation()
-    print(bg.grid.grid)
-    bg.grid.create_next_generation()
-    print(bg.grid.grid)
+    main()

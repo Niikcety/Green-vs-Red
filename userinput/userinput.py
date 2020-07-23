@@ -43,3 +43,12 @@ class UserInput:
         self.set_grid()
         wanted = input("Enter the coordinates of the cell and the round in format: 'x, y, round'. ")
         self.set_wanted(wanted)
+
+    def get_output(self):
+        times = 0
+        self.grid.create_next_generation()
+        for generation in range(0, self.turns):
+            if self.grid.grid[self.wanted_x][self.wanted_y] == '1':
+                times += 1
+            self.grid.create_next_generation()
+        print('The cell with coordinates ({}, {}) was green {} times'.format(self.wanted_x, self.wanted_y, times))

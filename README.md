@@ -2,6 +2,6 @@
 
 > Small game that counts how many times cell will become green in N 'generations'.
 
-## Example (Optional)
+## Example
 
-![][gif1.gif]
+![](gif1.gif)

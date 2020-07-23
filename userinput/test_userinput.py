@@ -64,6 +64,7 @@ class TestUserInput(unittest.TestCase):
         self.assertEquals(user_input.wanted_y, 3)
         self.assertEquals(user_input.turns, 30)
 
+
 if __name__ == '__main__':
     unittest.main()
 

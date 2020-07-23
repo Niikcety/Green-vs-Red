@@ -5,8 +5,7 @@ class Grid:
         self.grid = []
 
     def add_row(self, row):
-        row_list = list(row)
-        self.grid.append(row_list)
+        self.grid.append(list(row))
 
     def check_for_green_neighbours(self, curr_x, curr_y, x=0, y=0):
         if curr_x + x < 0 or curr_y + y < 0 or curr_x + x >= self.x or curr_y + y >= self.y:
